@@ -3,19 +3,17 @@ import type { ContactFormValues } from './validation';
 /**
  * Contact form delivery.
  *
- * Configure ONE public form endpoint in `.env.local` (never a private API key — anything
- * prefixed with VITE_ is shipped to the browser):
+ * Configure in `.env.local` / your host's env settings (anything prefixed with VITE_ is
+ * shipped to the browser, so only use public keys/endpoints):
  *
- *   VITE_CONTACT_ENDPOINT=https://formspree.io/f/xxxxxxx
- *
- * Any endpoint that accepts a JSON POST and returns 2xx works (Formspree, Getform,
- * Basin, your own serverless function…). For Web3Forms, also set VITE_WEB3FORMS_ACCESS_KEY
- * (that key is designed to be public).
+ *   VITE_WEB3FORMS_ACCESS_KEY=xxxxxxxx-xxxx-…   ← simplest: Web3Forms (key is public by design)
+ *   VITE_CONTACT_ENDPOINT=https://formspree.io/f/xxxxxxx   ← or any JSON form endpoint
  *
  * Without configuration the form falls back to opening the visitor's email app.
  */
-const endpoint = (import.meta.env.VITE_CONTACT_ENDPOINT ?? '').trim();
+const WEB3FORMS_URL = 'https://api.web3forms.com/submit';
 const web3formsKey = (import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? '').trim();
+const endpoint = (import.meta.env.VITE_CONTACT_ENDPOINT ?? '').trim() || (web3formsKey ? WEB3FORMS_URL : '');
 
 export const isContactConfigured = endpoint !== '';
 
@@ -28,7 +26,7 @@ export async function sendContactMessage(values: ContactFormValues, fallbackEmai
     subject: values.subject.trim(),
     message: values.message.trim(),
     _subject: `Portfolio: ${values.subject.trim()}`,
-    ...(web3formsKey ? { access_key: web3formsKey } : {}),
+    ...(web3formsKey ? { access_key: web3formsKey, from_name: 'Portfolio contact form', replyto: values.email.trim() } : {}),
   };
 
   if (!isContactConfigured) {
@@ -51,7 +49,9 @@ export async function sendContactMessage(values: ContactFormValues, fallbackEmai
       body: JSON.stringify(payload),
       signal: controller.signal,
     });
-    if (!res.ok) {
+    // Some services (e.g. Web3Forms) also report failure in the JSON body.
+    const data = (await res.json().catch(() => null)) as { success?: boolean } | null;
+    if (!res.ok || data?.success === false) {
       return { ok: false, error: `The message service responded with an error (${res.status}). Please try again or email me directly.` };
     }
     return { ok: true, via: 'endpoint' };

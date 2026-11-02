@@ -130,18 +130,17 @@ The form validates name, email, subject and message, shows inline errors, and an
 
 **To receive messages directly** (recommended), use a free form service — no server or private key needed:
 
-**Formspree**
-1. Create a form at https://formspree.io and copy its endpoint (`https://formspree.io/f/abcdwxyz`).
+**Web3Forms (simplest — no account needed)**
+1. Go to https://web3forms.com, enter the email address where you want to receive messages, and click *Create Access Key*. The key is emailed to you.
 2. Create `.env.local` (copy `.env.example`) and set:
    ```
-   VITE_CONTACT_ENDPOINT=https://formspree.io/f/abcdwxyz
+   VITE_WEB3FORMS_ACCESS_KEY=your-access-key
    ```
+3. Add the same variable on your host (Vercel/Netlify → Environment Variables) and redeploy.
 
-**Web3Forms**
-```
-VITE_CONTACT_ENDPOINT=https://api.web3forms.com/submit
-VITE_WEB3FORMS_ACCESS_KEY=your-public-access-key
-```
+**Formspree (alternative)**
+1. Create a form at https://formspree.io and copy its endpoint (`https://formspree.io/f/abcdwxyz`).
+2. Set `VITE_CONTACT_ENDPOINT=https://formspree.io/f/abcdwxyz` in `.env.local` and on your host.
 
 Any endpoint that accepts a JSON `POST` and returns a 2xx status works (e.g. your own serverless function).
 
@@ -156,8 +155,10 @@ Restart `npm run dev` after editing env files. On your host, add the same variab
 | Variable                    | Required | Purpose                                                    |
 | --------------------------- | -------- | ---------------------------------------------------------- |
 | `VITE_SITE_URL`             | Yes (prod) | Your live URL without trailing slash — used in canonical & Open Graph tags |
-| `VITE_CONTACT_ENDPOINT`     | No       | Public form endpoint. Empty → `mailto:` fallback           |
-| `VITE_WEB3FORMS_ACCESS_KEY` | No       | Only for Web3Forms                                         |
+| `VITE_WEB3FORMS_ACCESS_KEY` | No       | Web3Forms access key — enough on its own to enable the form |
+| `VITE_CONTACT_ENDPOINT`     | No       | Any other public JSON form endpoint (e.g. Formspree)       |
+
+With neither set, the form falls back to `mailto:`.
 
 `.env` holds a safe default; put your real values in `.env.local` (git-ignored) or in your hosting dashboard.
 
