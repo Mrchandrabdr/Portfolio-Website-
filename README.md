@@ -132,11 +132,11 @@ The form validates name, email, subject and message, shows inline errors, and an
 
 **Web3Forms (simplest — no account needed)**
 1. Go to https://web3forms.com, enter the email address where you want to receive messages, and click *Create Access Key*. The key is emailed to you.
-2. Create `.env.local` (copy `.env.example`) and set:
+2. Put it in `.env` (already done for this site):
    ```
    VITE_WEB3FORMS_ACCESS_KEY=your-access-key
    ```
-3. Add the same variable on your host (Vercel/Netlify → Environment Variables) and redeploy.
+   The key is public by design, so it is committed and every deploy submits the form directly — no host settings needed.
 
 **Formspree (alternative)**
 1. Create a form at https://formspree.io and copy its endpoint (`https://formspree.io/f/abcdwxyz`).
