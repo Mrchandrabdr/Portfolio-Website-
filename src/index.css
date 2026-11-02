@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --nav-h: 4.25rem;
+  }
+
+  html {
+    scroll-padding-top: calc(var(--nav-h) + 1rem);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-ink-950 font-sans text-ink-100;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  ::selection {
+    background: rgba(185, 242, 107, 0.28);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.accent.DEFAULT');
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink-50;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .section {
+    @apply relative py-24 sm:py-28 lg:py-36;
+  }
+
+  /* Frosted panel used sparingly for elevated surfaces. */
+  .glass {
+    @apply border border-white/[0.07] bg-white/[0.025] shadow-glass backdrop-blur-xl;
+  }
+
+  .hairline {
+    @apply border-white/[0.07];
+  }
+
+  .kicker {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-ink-300;
+  }
+
+  .link-underline {
+    @apply relative;
+  }
+  .link-underline::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-accent transition-transform duration-300 ease-out-expo;
+  }
+  .link-underline:hover::after,
+  .link-underline[aria-current='true']::after {
+    @apply origin-left scale-x-100;
+  }
+
+  .text-gradient {
+    background: linear-gradient(110deg, #f3f4f6 10%, #b7bdc6 55%, #8b93a0 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grid-dots {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Scroll reveal — toggled by <Reveal/>. */
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+    transition:
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .code-block {
+    @apply font-mono text-[0.8125rem] leading-6;
+    tab-size: 4;
+  }
+}
+
+@layer utilities {
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 55%, transparent);
+  }
+  .mask-radial {
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 75%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

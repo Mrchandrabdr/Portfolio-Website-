@@ -1,0 +1,13 @@
+{
+  "name": "Chandra Bdr Katuwal — Portfolio",
+  "short_name": "Chandra",
+  "description": "Programming educator & developer.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07080a",
+  "theme_color": "#07080a",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
