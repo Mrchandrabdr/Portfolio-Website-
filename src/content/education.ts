@@ -9,20 +9,20 @@ export const education: EducationItem[] = [
     degree: 'BSc Computer Science & Information Technology (CSIT)',
     institution: 'Shree Yantra College',
     affiliation: 'Affiliated to Tribhuvan University (TU)',
-    period: '[2025] — Present',
+    period: '2025 — Present',
     status: 'In progress',
     description:
       'Studying programming, data structures & algorithms, computer architecture, databases and software engineering.',
-    highlights: ['[3rd Semester running]', '[Notable coursework or project]'],
+    highlights: ['Currently in 3rd semester'],
   },
   {
     degree: '+2 Science',
-    institution: '[Shree Mangalmaya Secondary School]',
+    institution: 'Shree Mangalmaya Secondary School',
     affiliation: 'National Examinations Board (NEB), Nepal',
-    period: '[2023] — [2025]',
+    period: '2023 — 2025',
     status: 'Completed',
-    description: 'Higher secondary education in the Science stream. [Computer Science]',
-    highlights: ['[A / 3.42]'],
+    description: 'Higher secondary education in the Science stream, with Computer Science.',
+    highlights: ['Grade A · GPA 3.42'],
   },
 ];
 
