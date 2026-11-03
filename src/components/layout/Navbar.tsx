@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { navItems, profile } from '@/content';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { useScrolled } from '@/hooks/useScrolled';
+import { LogoMark } from '@/components/ui/LogoMark';
 import { SocialLinks } from '@/components/ui/SocialLinks';
 import { cn } from '@/lib/cn';
 
@@ -70,10 +71,8 @@ export function Navbar() {
     >
       <nav aria-label="Primary" className="container flex h-[var(--nav-h)] items-center justify-between">
         <a href="#top" className="group flex items-center gap-2.5" onClick={() => setOpen(false)}>
-          <span className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/[0.03] font-display text-sm font-semibold text-ink-50 transition-colors group-hover:border-accent/60">
-            {profile.initials}
-            <span className="sr-only">— {profile.name}, back to top</span>
-          </span>
+          <LogoMark className="h-10 w-10 transition-transform duration-300 ease-out-expo group-hover:-rotate-3 group-hover:scale-105" />
+          <span className="sr-only">{profile.name}, back to top</span>
           <span aria-hidden="true" className="hidden font-mono text-xs text-ink-400 sm:inline">
             chandra<span className="text-accent">.</span>katuwal
           </span>

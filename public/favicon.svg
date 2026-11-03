@@ -1,6 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#0c0d10"/>
-  <rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"/>
-  <text x="31" y="41" text-anchor="middle" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="26" font-weight="700" fill="#f3f4f6" letter-spacing="-1">CK</text>
-  <circle cx="49" cy="39" r="3.2" fill="#b9f26b"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Simplified CBK ring emblem for small sizes (no inner arcs, heavier strokes). -->
+  <rect width="200" height="200" rx="44" fill="#0c0d10"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M23.2 66A84 84 0 0 1 176.8 66" stroke="#f3f4f6" stroke-width="16"/>
+    <path d="M23.2 134A84 84 0 0 0 176.8 134" stroke="#f3f4f6" stroke-width="16"/>
+  </g>
+  <g fill="none" stroke-width="13" stroke-linejoin="round">
+    <path d="M66 80H35A20 20 0 0 0 35 120H66" stroke="#f3f4f6"/>
+    <path d="M79 74V126M79 80H111A10 10 0 0 1 111 100H79M79 100H112A10 10 0 0 1 112 120H79" stroke="#f3f4f6"/>
+    <path d="M140 74V126M143 100L188 123" stroke="#f3f4f6"/>
+    <path d="M188 77L143 100" stroke="#b9f26b"/>
+  </g>
 </svg>
