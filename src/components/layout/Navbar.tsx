@@ -73,8 +73,9 @@ export function Navbar() {
         <a href="#top" className="group flex items-center gap-2.5" onClick={() => setOpen(false)}>
           <LogoMark className="h-10 w-10 transition-transform duration-300 ease-out-expo group-hover:-rotate-3 group-hover:scale-105" />
           <span className="sr-only">{profile.name}, back to top</span>
-          <span aria-hidden="true" className="hidden font-mono text-xs text-ink-400 sm:inline">
-            chandra<span className="text-accent">.</span>katuwal
+          <span aria-hidden="true" className="font-display text-[15px] font-medium tracking-tight text-ink-100">
+            {profile.name}
+            <span className="text-accent">.</span>
           </span>
         </a>
 
